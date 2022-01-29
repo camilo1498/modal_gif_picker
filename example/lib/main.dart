@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () async {
           /// request your Giphy API key at https://developers.giphy.com/
           final gif = await ModalGifPicker.pickModalSheetGif(
+            apiKey: '[HERE YOUR API KEY]',
             context: context,
             rating: GiphyRating.g,
             sticker: true,
@@ -51,7 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisCount: 3,
             childAspectRatio: 1.2,
             topDragColor: Colors.white.withOpacity(0.2),
-            apiKey: '[HERE YOUR API KEY]',
             previewType: GiphyPreviewType.previewWebp,
           );
 
