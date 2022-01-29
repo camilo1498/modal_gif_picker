@@ -3,9 +3,6 @@ this package is a renew version of [Giphy_Picker](https://pub.dev/packages/giphy
 
 The idea of this package is to create different UI solutions so that each developer can adapt it to their project or customize it to their liking using.
 
-## Features
-
-
 ## Getting started
 
 First you need to create your own (Giphy API Key)[https://developers.giphy.com/]
