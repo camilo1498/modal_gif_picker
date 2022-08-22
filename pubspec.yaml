@@ -1,5 +1,5 @@
 name: modal_gif_picker
-description: A new Flutter project.
+description: This package was created to get gif from GIPHY api, the is used in stories_editor package
 version: 0.0.2
 homepage: https://github.com/camilo1498/modal_gif_picker
 
