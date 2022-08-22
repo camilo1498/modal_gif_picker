@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:modal_gif_picker/modal_gif_picker.dart';
-import 'package:modal_gif_picker/src/model/client/gif.dart';
-import 'package:modal_gif_picker/src/model/client/languages.dart';
-import 'package:modal_gif_picker/src/model/client/rating.dart';
-import 'package:modal_gif_picker/src/model/giphy_decorator.dart';
-import 'package:modal_gif_picker/src/model/giphy_preview_types.dart';
 
 /// Provides the context for a Giphy search operation, and makes its data available to its widget sub-tree.
 class GiphyContext extends InheritedWidget {

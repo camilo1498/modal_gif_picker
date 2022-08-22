@@ -1,5 +1,3 @@
-
-
 import 'package:modal_gif_picker/src/model/client/image.dart';
 
 class GiphyImages {

@@ -1,5 +1,8 @@
+## Flutter version 3.0.5
+
 ## Description
 this package is a renew version of [Giphy_Picker](https://pub.dev/packages/giphy_picker).
+
 
 The idea of this package is to create different UI solutions so that each developer can adapt it to their project or customize it to their liking.
 

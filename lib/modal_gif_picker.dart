@@ -1,6 +1,5 @@
 library modal_gif_picker;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_gif_picker/src/model/client/gif.dart';
 import 'package:modal_gif_picker/src/model/client/languages.dart';
@@ -17,26 +16,23 @@ export 'package:modal_gif_picker/src/model/giphy_preview_types.dart';
 
 typedef ErrorListener = void Function(dynamic error);
 
-class ModalGifPicker{
-
-  static Future<GiphyGif?> pickModalSheetGif({
-    required BuildContext context,
-    required String apiKey,
-    String rating = GiphyRating.g,
-    String lang = GiphyLanguage.english,
-    bool sticker = false,
-    GiphyPreviewType? previewType = GiphyPreviewType.previewGif,
-    Color backGroundColor = Colors.black,
-    Color textColor = Colors.white,
-    Color backDropColor = Colors.white,
-    Color topDragColor = Colors.white54,
-    double crossAxisSpacing = 5,
-    double mainAxisSpacing = 5,
-    int crossAxisCount = 2,
-    double childAspectRatio = 1.6,
-    ErrorListener? onError
-  }) async{
-
+class ModalGifPicker {
+  static Future<GiphyGif?> pickModalSheetGif(
+      {required BuildContext context,
+      required String apiKey,
+      String rating = GiphyRating.g,
+      String lang = GiphyLanguage.english,
+      bool sticker = false,
+      GiphyPreviewType? previewType = GiphyPreviewType.previewGif,
+      Color backGroundColor = Colors.black,
+      Color textColor = Colors.white,
+      Color backDropColor = Colors.white,
+      Color topDragColor = Colors.white54,
+      double crossAxisSpacing = 5,
+      double mainAxisSpacing = 5,
+      int crossAxisCount = 2,
+      double childAspectRatio = 1.6,
+      ErrorListener? onError}) async {
     GiphyGif? result;
 
     /// picker ui
@@ -45,7 +41,7 @@ class ModalGifPicker{
         barrierColor: Colors.transparent,
         backgroundColor: Colors.transparent,
         isScrollControlled: true,
-        builder: (BuildContext context){
+        builder: (BuildContext context) {
           return FractionallySizedBox(
             heightFactor: 0.9,
             child: DraggableScrollableSheet(
@@ -53,7 +49,8 @@ class ModalGifPicker{
               maxChildSize: 1,
               minChildSize: 0.9,
               expand: true,
-              builder: (BuildContext context, ScrollController scrollController){
+              builder:
+                  (BuildContext context, ScrollController scrollController) {
                 return Center(
                   child: Container(
                     decoration: BoxDecoration(
@@ -68,10 +65,9 @@ class ModalGifPicker{
                               offset: const Offset(0, 16))
                         ]),
                     child: ClipRRect(
-                      borderRadius:  const BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(16),
-                          topLeft: Radius.circular(16)
-                      ),
+                          topLeft: Radius.circular(16)),
                       child: BackdropFilter(
                         filter: ui.ImageFilter.blur(
                           sigmaX: 40.0,
@@ -86,8 +82,7 @@ class ModalGifPicker{
                               border: Border.all(
                                 width: 1.5,
                                 color: Colors.transparent,
-                              )
-                          ),
+                              )),
                           child: Center(
                             child: Column(
                               children: [
@@ -107,24 +102,28 @@ class ModalGifPicker{
                                 ),
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
                                     child: GiphyContext(
                                       previewType: previewType,
                                       apiKey: apiKey,
                                       showPreviewPage: false,
                                       rating: rating,
-                                      searchDelay: const Duration(milliseconds: 300),
+                                      searchDelay:
+                                          const Duration(milliseconds: 300),
                                       language: lang,
                                       sticker: sticker,
-                                      onError: onError ?? (error) => _showErrorDialog(context, error),
-                                      onSelected: (gif){
+                                      onError: onError ??
+                                          (error) =>
+                                              _showErrorDialog(context, error),
+                                      onSelected: (gif) {
                                         result = gif;
                                         Navigator.pop(context);
                                       },
                                       decorator: null,
                                       child: GiphySearchView(
                                         sheetScrollController: scrollController,
-                                        crossAxisCount:crossAxisCount,
+                                        crossAxisCount: crossAxisCount,
                                         childAspectRatio: childAspectRatio,
                                         crossAxisSpacing: crossAxisSpacing,
                                         mainAxisSpacing: mainAxisSpacing,
@@ -143,8 +142,7 @@ class ModalGifPicker{
               },
             ),
           );
-        }
-    );
+        });
 
     return result;
   }
@@ -154,9 +152,8 @@ class ModalGifPicker{
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20)
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           elevation: 1,
           backgroundColor: Colors.transparent,
           child: Container(
@@ -164,16 +161,15 @@ class ModalGifPicker{
             height: 260,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Colors.grey[900],
-              borderRadius: BorderRadius.circular(20),
+                color: Colors.grey[900],
+                borderRadius: BorderRadius.circular(20),
                 boxShadow: const [
-                  BoxShadow(color: Colors.black,offset: Offset(0,1),
-                      blurRadius: 3
-                  ),
-                ]
-            ),
+                  BoxShadow(
+                      color: Colors.black, offset: Offset(0, 1), blurRadius: 3),
+                ]),
             child: Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 10),
+              padding: const EdgeInsets.only(
+                  left: 15, right: 15, top: 15, bottom: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -182,22 +178,25 @@ class ModalGifPicker{
                   const Text(
                     'Giphy Error',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold
-                    ),
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 40,),
+                  const SizedBox(
+                    height: 40,
+                  ),
                   Text(
                     '$error',
                     style: const TextStyle(
-                        color: Colors.white54,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                      color: Colors.white54,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 40,),
+                  const SizedBox(
+                    height: 40,
+                  ),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: ElevatedButton(
@@ -207,8 +206,7 @@ class ModalGifPicker{
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
-                            fontWeight: FontWeight.w500
-                        ),
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                   )
@@ -221,4 +219,3 @@ class ModalGifPicker{
     );
   }
 }
-

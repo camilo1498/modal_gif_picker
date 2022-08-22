@@ -88,6 +88,7 @@ class _GiphyRenderImageState extends State<GiphyRenderImage> {
           }
           return image;
         }
-        return widget.placeholder ?? Center(child: CircularProgressIndicator());
+        return widget.placeholder ??
+            const Center(child: CircularProgressIndicator());
       });
 }

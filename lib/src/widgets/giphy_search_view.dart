@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:modal_gif_picker/src/model/giphy_repository.dart';
@@ -8,20 +10,20 @@ import 'package:modal_gif_picker/src/widgets/giphy_grid_view.dart';
 /// Provides the UI for searching Giphy gif images.
 class GiphySearchView extends StatefulWidget {
   /// added scroll controller
-  final sheetScrollController;
+  final ScrollController? sheetScrollController;
   int crossAxisCount;
   double childAspectRatio;
   double crossAxisSpacing;
   double mainAxisSpacing;
 
-  GiphySearchView({
-    Key? key,
-    this.sheetScrollController,
-    this.childAspectRatio = 1.6,
-    this.crossAxisCount = 2,
-    this.crossAxisSpacing = 5,
-    this.mainAxisSpacing = 5
-  }) : super(key: key);
+  GiphySearchView(
+      {Key? key,
+      this.sheetScrollController,
+      this.childAspectRatio = 1.6,
+      this.crossAxisCount = 2,
+      this.crossAxisSpacing = 5,
+      this.mainAxisSpacing = 5})
+      : super(key: key);
   @override
   _GiphySearchViewState createState() => _GiphySearchViewState();
 }
@@ -35,7 +37,7 @@ class _GiphySearchViewState extends State<GiphySearchView> {
   @override
   void initState() {
     // initiate search on next frame (we need context)
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       final giphy = GiphyContext.of(context);
       _debouncer = Debouncer(
         delay: giphy.searchDelay,
@@ -55,10 +57,11 @@ class _GiphySearchViewState extends State<GiphySearchView> {
   @override
   Widget build(BuildContext context) {
     final giphy = GiphyContext.of(context);
+
     /// customize text field search and some font styles
     return Column(children: <Widget>[
       Material(
-        elevation:0,
+        elevation: 0,
         color: Colors.transparent,
         child: Row(
           children: [
@@ -98,20 +101,20 @@ class _GiphySearchViewState extends State<GiphySearchView> {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Trending on GIPHY',
-                style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 18,fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    color: Colors.white.withOpacity(0.5),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500),
               ),
             ),
           ),
-         Padding(
-           padding: const EdgeInsets.all(8.0),
-           child: Align(
-             alignment: Alignment.centerRight,
-               child: Image.asset(
-                   'assets/PoweredBy_200px-Black_HorizLogo.png',
-                   package: 'modal_gif_picker',
-                   height: 20)
-           ),
-         )
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+                alignment: Alignment.centerRight,
+                child: Image.asset('assets/PoweredBy_200px-Black_HorizLogo.png',
+                    package: 'modal_gif_picker', height: 20)),
+          )
         ],
       ),
       Expanded(
@@ -125,13 +128,15 @@ class _GiphySearchViewState extends State<GiphySearchView> {
                           child: RefreshIndicator(
                               child: GiphyGridView(
                                   key: Key('${snapshot.data.hashCode}'),
-                                  crossAxisCount:widget.crossAxisCount,
+                                  crossAxisCount: widget.crossAxisCount,
                                   childAspectRatio: widget.childAspectRatio,
                                   crossAxisSpacing: widget.crossAxisSpacing,
                                   mainAxisSpacing: widget.mainAxisSpacing,
                                   repo: snapshot.data!,
+
                                   /// add scroll controller
-                                  scrollController: widget.sheetScrollController),
+                                  scrollController:
+                                      widget.sheetScrollController),
                               onRefresh: () =>
                                   _search(giphy, term: _textController.text)),
                           onNotification: (n) {
@@ -144,12 +149,12 @@ class _GiphySearchViewState extends State<GiphySearchView> {
                           },
                         )
                       : Center(
-                      child: Text(
-                        'No results',
-                        style: TextStyle(
-                            color: Colors.white54.withOpacity(0.5),
-                            fontSize: 18),
-                      ));
+                          child: Text(
+                          'No results',
+                          style: TextStyle(
+                              color: Colors.white54.withOpacity(0.5),
+                              fontSize: 18),
+                        ));
                 } else if (snapshot.hasError) {
                   Center(
                       child: Text('An error occurred',
@@ -157,7 +162,8 @@ class _GiphySearchViewState extends State<GiphySearchView> {
                               color: Colors.white54.withOpacity(0.5),
                               fontSize: 18)));
                 }
-                return const Center(child: CircularProgressIndicator(
+                return const Center(
+                    child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(Colors.red),
                   strokeWidth: 1.2,
                 ));

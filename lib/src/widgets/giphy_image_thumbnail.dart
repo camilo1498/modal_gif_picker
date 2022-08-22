@@ -36,16 +36,17 @@ class _GiphyImageThumbnailState extends State<GiphyImageThumbnail> {
       future: _loadPreview,
       builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
         if (!snapshot.hasData) {
-          return widget.placeholder ?? Container(
-            alignment: Alignment.center,
-            color: Colors.transparent,
-            height: 50,
-            width: 50,
-            child: const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(Colors.white54),
-              strokeWidth: 1,
-            ),
-          );
+          return widget.placeholder ??
+              Container(
+                alignment: Alignment.center,
+                color: Colors.transparent,
+                height: 50,
+                width: 50,
+                child: const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation(Colors.white54),
+                  strokeWidth: 1,
+                ),
+              );
         }
         return Image.memory(snapshot.data!, fit: BoxFit.cover);
       });

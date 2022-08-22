@@ -3,12 +3,9 @@ import 'dart:collection';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'package:modal_gif_picker/modal_gif_picker.dart';
-import 'package:modal_gif_picker/src/model/giphy_client.dart';
-import 'package:modal_gif_picker/src/model/giphy_preview_types.dart';
 import 'package:modal_gif_picker/src/model/repository.dart';
-import 'package:modal_gif_picker/src/widgets/giphy_render_image.dart';
 
-typedef Future<GiphyCollection> GetCollection(
+typedef GetCollection = Future<GiphyCollection> Function(
     GiphyClient client, int offset, int limit);
 
 /// Retrieves and caches gif collections from Giphy.
@@ -34,6 +31,7 @@ class GiphyRepository extends Repository<GiphyGif> {
   }
 
   /// Retrieves specified page of gif data from Giphy.
+  @override
   Future<Page<GiphyGif>> getPage(int page) async {
     final offset = page * pageSize;
     final collection = await getCollection(_giphyClient, offset, pageSize);
@@ -120,9 +118,9 @@ class GiphyRepository extends Repository<GiphyGif> {
         break;
     }
     url ??= gif.images.previewGif?.url ??
-          gif.images.fixedWidthSmallStill?.url ??
-          gif.images.fixedHeightDownsampled?.url ??
-          gif.images.original?.url;
+        gif.images.fixedWidthSmallStill?.url ??
+        gif.images.fixedHeightDownsampled?.url ??
+        gif.images.original?.url;
 
     if (url != null) {
       return await GiphyRenderImage.load(url, client: _client);
