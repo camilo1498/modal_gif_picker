@@ -1,6 +1,6 @@
 name: modal_gif_picker
 description: This package was created to get gif from GIPHY api, the is used in stories_editor package
-version: 0.0.2
+version: 0.1.0
 homepage: https://github.com/camilo1498/modal_gif_picker
 
 environment:
