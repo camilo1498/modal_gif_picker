@@ -1,21 +1,21 @@
 name: modal_gif_picker
 description: This package was created to get gif from GIPHY api, the is used in stories_editor package
-version: 0.0.2
+version: 0.2.0+2
 homepage: https://github.com/camilo1498/modal_gif_picker
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.13.5
+  http: ^1.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   assets:
